@@ -1,0 +1,3 @@
+"use client";
+import { DashboardShell } from "@/components/dashboard/DashboardShell";
+export default function Page() { return <DashboardShell><div className="mx-auto max-w-5xl"><p className="text-[9px] font-bold uppercase tracking-[.25em] text-blue-300/60">BUBBLE command center</p><h1 className="mt-2 text-3xl font-black">Documents</h1><div className="mt-8 rounded-3xl border border-white/8 bg-white/[.025] p-8"><p className="text-sm text-white/45">This workspace is connected to the authenticated platform. Project management is live under Projects; this module is staged for the next operational expansion.</p></div></div></DashboardShell>; }

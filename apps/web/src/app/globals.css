@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { --brand-glow: rgba(22,119,255,.28); color-scheme: dark; }
+html { scroll-behavior: smooth; background: #020407; }
+/* No background here on purpose: body is a normal in-flow box, and an
+   opaque body background would paint OVER the fixed, -z-10 global
+   backdrop (SiteBackdrop) rather than behind it. html's background above
+   already covers the canvas/scrollbar gutter as a fallback. */
+body { min-height: 100%; color: white; overflow-x: hidden; }
+* { box-sizing: border-box; }
+
+/* Global cinematic background — the same supplied BUBBLE Engineering
+   construction photograph on every route. Desktop keeps the crane/tower
+   centered; mobile shifts focus so the main structure stays visible. */
+.bg-construction-backdrop {
+  background-image: url("/images/bubble-construction-night-v2.png");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+@media (max-width: 767px) {
+  .bg-construction-backdrop { background-position: 62% center; }
+}
+::selection { background: rgba(22,119,255,.35); color: white; }
+
+.bg-animated-gradient { background: radial-gradient(circle at 50% 20%, rgba(22,119,255,.16), transparent 32%), linear-gradient(145deg,#020407 0%,#06101d 45%,#020407 100%); background-size: 160% 160%; }
+.glass-card { @apply rounded-3xl border border-white/10 backdrop-blur-xl shadow-glass; background: rgba(255,255,255,.045); }
+.glass-input { @apply w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-white/35 outline-none transition focus:border-blue-300/40 focus:bg-white/10; }
+.blueprint-grid { background-image: linear-gradient(rgba(74,147,255,.12) 1px, transparent 1px), linear-gradient(90deg, rgba(74,147,255,.12) 1px, transparent 1px); background-size: 42px 42px; mask-image: radial-gradient(circle at center, black, transparent 78%); }
+.logo-lockup { box-shadow: 0 0 30px rgba(22,119,255,.1); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+
+/* Backdrop-filter fallback: if unsupported, glass surfaces stay readable
+   with a slightly denser background. */
+@supports not (backdrop-filter: blur(1px)) {
+  .glass-card { background: rgba(4, 9, 18, .82); }
+}

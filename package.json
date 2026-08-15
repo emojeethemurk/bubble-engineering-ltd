@@ -1,0 +1,48 @@
+{
+  "name": "construction-platform",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev --workspace=apps/web",
+    "dev:api": "npm run start:dev --workspace=apps/api",
+    "dev": "concurrently -n API,WEB -c blue,green \"npm run dev:api\" \"npm run dev:web\"",
+    "build": "npm run build --workspace=apps/web && npm run build --workspace=apps/api",
+    "db:generate": "npm run generate --workspace=packages/database",
+    "db:migrate": "npm run migrate --workspace=packages/database",
+    "db:seed": "npm run seed --workspace=packages/database",
+    "lint:api": "npm run lint --workspace=apps/api",
+    "test:api": "npm run test --workspace=apps/api",
+    "test": "npm run test:api",
+    "audit": "npm audit --audit-level=high",
+    "security:check": "npm audit --audit-level=high",
+    "verify": "npm run db:generate && npm run build && npm run test:api && npm run security:check"
+  },
+  "overrides": {
+    "tar": "^7.5.21",
+    "glob": "^13.0.6",
+    "picomatch": "^4.0.4",
+    "ajv": "^8.18.0",
+    "tmp": "^0.2.6",
+    "webpack": "^5.106.0",
+    "qs": "^6.15.2",
+    "lodash": "^4.18.0",
+    "sharp": "^0.35.0"
+  },
+  "allowScripts": {
+    "@prisma/client": true,
+    "@prisma/engines": true,
+    "bcrypt": true,
+    "prisma": true
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3",
+    "concurrently": "^9.1.0"
+  },
+  "engines": {
+    "node": ">=20.19.0",
+    "npm": ">=10.8.0"
+  }
+}
